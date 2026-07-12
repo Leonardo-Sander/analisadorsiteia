@@ -19,6 +19,7 @@ export default function Home() {
   const [expanded, setExpanded] = useState<Record<string, boolean>>({});
   const [errorMessage, setErrorMessage] = useState("");
   const [copyLabel, setCopyLabel] = useState("Copiar relatório");
+  const [isMock, setIsMock] = useState(false);
 
   function goHome() {
     setScreen("home");
@@ -28,6 +29,7 @@ export default function Home() {
     setExpanded({});
     setErrorMessage("");
     setCopyLabel("Copiar relatório");
+    setIsMock(false);
   }
 
   async function startAnalysis(rawUrl?: string) {
@@ -52,6 +54,7 @@ export default function Home() {
       }
       setAnalyzedUrl(data.url ?? target);
       setCategories(data.categories as AnalysisCategory[]);
+      setIsMock(!!data.mock);
       setStatus("ready");
     } catch {
       setErrorMessage("Falha de conexão. Verifique sua internet e tente novamente.");
@@ -226,6 +229,12 @@ export default function Home() {
 
             {isReady && (
               <>
+                {isMock && (
+                  <div className="mock-banner" style={{ marginBottom: 16 }}>
+                    Dados de exemplo — nenhuma GEMINI_API_KEY configurada no servidor. Configure sua
+                    chave em .env.local para uma análise real.
+                  </div>
+                )}
                 <ScoreRing score={overallScore} />
                 <div className="cards-col">
                   {categories.map((cat) => (
