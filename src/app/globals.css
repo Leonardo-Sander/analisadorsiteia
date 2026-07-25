@@ -156,7 +156,7 @@ button {
   color: var(--fg);
 }
 
-/* HOME */
+/* home */
 .home-wrap {
   max-width: 900px;
   margin: 0 auto;
@@ -357,7 +357,7 @@ h1 span {
   margin: 0;
 }
 
-/* RESULT */
+/* result screen */
 .result-wrap {
   max-width: 720px;
   margin: 0 auto;
